@@ -11,7 +11,7 @@
             {{ props.type }}
         </p>
 
-        <a href="#">Ver detalles</a>
+        <router-link :to="{ name: 'movie-details', params: {id: props.id} }">Ver detalles</router-link>
     </div>
 </template>
 

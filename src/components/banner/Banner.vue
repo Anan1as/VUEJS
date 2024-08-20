@@ -5,6 +5,8 @@
         <input
           type="text"
           :required="true"
+          v-model="inputValue"
+          @input="onChangeInputValue"
         />
         <span>Search movie</span>
       </div>
@@ -20,8 +22,25 @@
 import { ref } from "vue";
 /**Assets imports */
 import headerImg from "@/assets/images/header-img.svg";
+import { useMoviesStore } from "@/store/movie.store"
 
 const imageUrl = ref(headerImg);
+const inputValue = ref("");
+
+const store = useMoviesStore()
+
+const onChangeInputValue = () => {
+  const search = inputValue.value.trim().toLowerCase();
+
+  if (search === "") {
+    store.getMovies()
+    return
+  }
+
+  setTimeout(() => {
+    store.getMovies(search)
+  }, 1000)
+}
 </script>
 
 <style scoped lang="scss">
